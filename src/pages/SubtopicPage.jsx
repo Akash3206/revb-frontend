@@ -75,14 +75,12 @@ export default function SubtopicPage() {
         }
     }
 
-    // 🟢 Open edit modal
     function openEditModal(link) {
         setEditingLink(link);
         setEditForm({ title: link.title, description: link.description, url: link.url });
         setEditModalOpen(true);
     }
 
-    // 🟢 Save edited link
     async function saveEdit() {
         try {
             const res = await api.put(`/api/links/${editingLink.id}`, editForm);
@@ -94,9 +92,24 @@ export default function SubtopicPage() {
         }
     }
 
-    const cols = ["S.No", "Title", "Description", "Link", "Actions"];
+    // 🕒 Format createdAt date
+    const formatDate = (dateString) => {
+        if (!dateString) return "-";
+        const date = new Date(dateString);
+        return date.toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+        });
+    };
+
+    // 🧾 Columns + Rows
+    const cols = ["S.No", "Created At", "Title", "Description", "Link", "Actions"];
     const rows = links.map((l, i) => [
         i + 1,
+        formatDate(l.createdAt),
         l.title,
         l.description,
         <a
