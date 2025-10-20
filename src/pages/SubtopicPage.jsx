@@ -109,7 +109,7 @@ export default function SubtopicPage() {
     const cols = ["S.No", "Created At", "Title", "Description", "Link", "Actions"];
     const rows = links.map((l, i) => [
         i + 1,
-        formatDate(l.createdAt),
+        formatDate(l.dateAdded),
         l.title,
         l.description,
         <a
