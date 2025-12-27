@@ -96,7 +96,7 @@ export default function SubtopicPage() {
     const formatDate = (dateString) => {
         if (!dateString) return "-";
         const date = new Date(dateString);
-        return date.toLocaleString("en-IN", {
+        return date.toLocaleString(undefined, {
             day: "2-digit",
             month: "short",
             year: "numeric",
